@@ -1,35 +1,81 @@
 server:
   port: 9001
-  servlet:
-    context-path: /
+
 
 spring:
   main:
     web-application-type: reactive
   application:
+    name: gateway-service
 
-    name: "gateway-service"
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes[0]:
+        id: task-service
+        uri: lb://task-service
+        predicates[0]: Path=/tasks/**
+      routes[1]:
+        id: user-service
+        uri: lb://keycloak-client
+        predicates[1]: Path=/users/**
+      routes[2]:
+        id: gateway-service
+        uri: lb://gateway-service
+        predicates[2]: Path=/gateway/**
 
-
-
+    consul:
+      host: 192.168.99.100
+      config:
+        enabled: false
+      port: 8500
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/auth/realms/ream-mini-project
+#server:
+#  ssl:
+#    key-store-password: test123
+#    key-store: classpath:ssldemo.p12
+#    key-store-type: PKCS12
+#    key-alias: ssldemo
+#    enabled: 'true'
 springdoc:
-  enable-native-support: true
-  api-docs:
-    enabled: true
   swagger-ui:
-    enabled: true
-    path: /swagger-ui.html
-    config-url: /v3/api-docs/swagger-config
-    urls:
-      - url: /v3/api-docs
-        name: API Gateway Service
-        primaryName: API Gateway Service
-      - url: /task-service/v3/api-docs
-        name: task Service
-        primaryName: Task Service
-      - url: /keycloak-client/v3/api-docs
-        name: Keycloak Client
-        primaryName: Keycloak Client
+    urls[0]:
+      name: Task Service APIs
+      url: /task-service/v3/api-docs
+    urls[1]:
+      url: /keycloak-client/v3/api-docs
+      name: Keycloak client APIs
+    urls[2]:
+      url: /gateway-service/v3/api-docs
+      name: Gateway Service APIs
+
+
+
+
+#springdoc:
+#  enable-native-support: true
+#  api-docs:
+#    enabled: true
+#  swagger-ui:
+#    enabled: true
+#    path: /swagger-ui.html
+#    config-url: /v3/api-docs/swagger-config
+#    urls:
+#      - url: /v3/api-docs
+#        name: API Gateway Service
+#        primaryName: API Gateway Service
+#      - url: /task-service/v3/api-docs
+#        name: task Service
+#        primaryName: Task Service
+#      - url: /keycloak-client/v3/api-docs
+#        name: Keycloak Client
+#        primaryName: Keycloak Client
 
 eureka:
   client:
