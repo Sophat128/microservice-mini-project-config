@@ -13,18 +13,18 @@ spring:
       discovery:
         locator:
           enabled: true
-      routes[0]:
+      routes[2]:
         id: task-service
         uri: lb://task-service
         predicates[0]: Path=/tasks/**
-      routes[1]:
-        id: user-service
+      routes[0]:
+        id: keycloak-client
         uri: lb://keycloak-client
-        predicates[1]: Path=/users/**
-      routes[2]:
+        predicates[0]: Path=/users/**
+      routes[1]:
         id: gateway-service
         uri: lb://gateway-service
-        predicates[2]: Path=/gateway/**
+        predicates[0]: Path=/gateway/**
 
     consul:
       host: 192.168.99.100
@@ -46,13 +46,13 @@ spring:
 #    enabled: 'true'
 springdoc:
   swagger-ui:
-    urls[0]:
+    urls[2]:
       name: Task Service APIs
       url: /task-service/v3/api-docs
-    urls[1]:
+    urls[0]:
       url: /keycloak-client/v3/api-docs
       name: Keycloak client APIs
-    urls[2]:
+    urls[1]:
       url: /gateway-service/v3/api-docs
       name: Gateway Service APIs
 
