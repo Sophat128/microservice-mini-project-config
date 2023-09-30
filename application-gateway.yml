@@ -1,12 +1,12 @@
 server:
   port: 9001
 
-  ssl:
-    key-store-password: test123
-    key-store: classpath:ssldemo.p12
-    key-store-type: PKCS12
-    key-alias: ssldemo
-    enabled: 'true'
+#  ssl:
+#    key-store-password: test123
+#    key-store: classpath:ssldemo.p12
+#    key-store-type: PKCS12
+#    key-alias: ssldemo
+#    enabled: 'true'
 
 
 
