@@ -1,6 +1,15 @@
 server:
   port: 9001
 
+  ssl:
+    key-store-password: test123
+    key-store: classpath:ssldemo.p12
+    key-store-type: PKCS12
+    key-alias: ssldemo
+    enabled: 'true'
+
+
+
 
 spring:
   main:
@@ -50,13 +59,7 @@ keycloak:
     client-id: 'spring-microservice-mini-project'
     secret: 'V7uwI888k5hlKDiVwKIAnqU2EhjM9MY1'
     provider: secret
-#server:
-#  ssl:
-#    key-store-password: test123
-#    key-store: classpath:ssldemo.p12
-#    key-store-type: PKCS12
-#    key-alias: ssldemo
-#    enabled: 'true'
+
 springdoc:
   swagger-ui:
     urls[2]:
