@@ -38,6 +38,18 @@ spring:
         jwt:
           issuer-uri: http://localhost:8080/auth/realms/ream-mini-project
           jwk-set-uri: http://localhost:8080/auth/realms/ream-mini-project/protocol/openid-connect/certs
+
+keycloak:
+  realm: ream-mini-project
+  resource: spring-microservice-mini-project
+  auth-server-url: http://localhost:8080/auth/ #docker container
+
+  credentials:
+    username: 'admin'
+    password: 'admin'
+    client-id: 'spring-microservice-mini-project'
+    secret: 'V7uwI888k5hlKDiVwKIAnqU2EhjM9MY1'
+    provider: secret
 #server:
 #  ssl:
 #    key-store-password: test123
