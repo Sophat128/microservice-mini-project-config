@@ -40,13 +40,12 @@ spring:
       config:
         enabled: false
       port: 8500
-
   security:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:8080/auth/realms/ream-mini-project
-          jwk-set-uri: http://localhost:8080/auth/realms/ream-mini-project/protocol/openid-connect/certs
+          issuer-uri: "http://localhost:8080/auth/realms/ream-mini-project"
+          jwk-set-uri: "http://localhost:8080/auth/realms/ream-mini-project/protocol/openid-connect/certs"
 
 keycloak:
   realm: ream-mini-project
