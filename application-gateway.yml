@@ -1,102 +1,36 @@
 server:
-  port: 9001
-
-#  ssl:
-#    key-store-password: test123
-#    key-store: classpath:ssldemo.p12
-#    key-store-type: PKCS12
-#    key-alias: ssldemo
-#    enabled: 'true'
-
-
-
-
+  servlet:
+    context-path: /
+  port:
+    9001
 spring:
-  main:
-    web-application-type: reactive
+  #  main:
+  #    web-application-type: reactive
+
   application:
-    name: gateway-service
+    name: api-gateway-service
+springdoc:
 
-  cloud:
-    gateway:
-      discovery:
-        locator:
-          enabled: true
-      routes[2]:
-        id: task-service
-        uri: lb://task-service
-        predicates[0]: Path=/tasks/**
-      routes[0]:
-        id: keycloak-client
-        uri: lb://keycloak-client
-        predicates[0]: Path=/users/**
-      routes[1]:
-        id: gateway-service
-        uri: lb://gateway-service
-        predicates[0]: Path=/gateway/**
-
-    consul:
-      host: 192.168.99.100
-      config:
-        enabled: false
-      port: 8500
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: "http://localhost:8080/auth/realms/ream-mini-project"
-          jwk-set-uri: "http://localhost:8080/auth/realms/ream-mini-project/protocol/openid-connect/certs"
-#
-#keycloak:
-#  realm: ream-mini-project
-#  resource: spring-microservice-mini-project
-#  auth-server-url: http://localhost:8080/auth/ #docker container
-#
-#  credentials:
-#    username: 'admin'
-#    password: 'admin'
-#    client-id: 'spring-microservice-mini-project'
-#    secret: 'V7uwI888k5hlKDiVwKIAnqU2EhjM9MY1'
-#    provider: secret
-#
-#springdoc:
-#  swagger-ui:
-#    urls[2]:
-#      name: Task Service APIs
-#      url: /task-service/v3/api-docs
-#    urls[0]:
-#      url: /keycloak-client/v3/api-docs
-#      name: Keycloak client APIs
-#    urls[1]:
-#      url: /gateway-service/v3/api-docs
-#      name: Gateway Service APIs
-
-
-
-
-#springdoc:
-#  enable-native-support: true
-#  api-docs:
-#    enabled: true
-#  swagger-ui:
-#    enabled: true
-#    path: /swagger-ui.html
-#    config-url: /v3/api-docs/swagger-config
-#    urls:
-#      - url: /v3/api-docs
-#        name: API Gateway Service
-#        primaryName: API Gateway Service
-#      - url: /task-service/v3/api-docs
-#        name: task Service
-#        primaryName: Task Service
-#      - url: /keycloak-client/v3/api-docs
-#        name: Keycloak Client
-#        primaryName: Keycloak Client
+  #  enable-native-support: true
+  api-docs:
+    enabled: true
+  swagger-ui:
+    disable-swagger-default-url: true
+    enabled: true
+    path: /swagger-ui.html
+    config-url: /v3/api-docs/swagger-config
+    urls:
+      - url: /v3/api-docs
+        name: API Gateway Service
+      - url: /task-service/v3/api-docs
+        name: Task Service
+      - url: /keycloak-client/v3/api-docs
+        name: Keycloak Client
 
 eureka:
   client:
     serviceUrl:
-          defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://localhost:8761/eureka/
 management:
   endpoints:
     web:
@@ -106,6 +40,3 @@ management:
   endpoint:
     gateway:
       enabled: true
-
-
-
