@@ -26,5 +26,16 @@ logging:
 
 
 openapi:
+  service:
+    title: keycloak-client #title that you will want to display in the swagger ui
+    version: 1.0.0
+    url: http://localhost:9001 #api gateway url
   oAuthFlow:
     tokenUrl: http://localhost:8080/auth/realms/ream-mini-project/protocol/openid-connect/token
+
+
+springdoc:
+  api-docs:
+    path: /keycloak-client/v3/api-docs #these urls will used to load the swagger ui of this service by the api gateway
+  swagger-ui:
+    path: /keycloak-client/swagger-ui.html
